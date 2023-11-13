@@ -1,0 +1,84 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Ubuntu, "Font Awesome 5 Free";
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+    min-height: 0;
+    border-radius: 5px;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #eceff4;
+}
+
+#tray {
+    border-left: 5px solid #ebcb8b;
+    border-right: 5px solid #ebcb8b;
+    border-radius: 5px;
+}
+
+#window {
+    border-left: 10px solid #ebcb8b;
+    border-right: 10px solid #ebcb8b;
+    border-radius: 5px;
+}
+
+#workspaces {
+    border-radius: 5px;
+    background: #2e3440;
+}
+
+#workspaces button {
+    padding: 0 7px;
+    background: transparent;
+    color: #eceff4;
+    border: none;
+    border-radius: 5px;
+}
+
+#workspaces button:hover {
+    box-shadow: 0px 0px;
+}
+
+#battery,
+#backlight,
+#network,
+#pulseaudio,
+#pulseaudio.muted,
+#bluetooth,
+#custom-power,
+#clock,
+#workspaces button.focused,
+#worspaces button:hover,
+#window,
+#tray,
+#language {
+    background-color: #ebcb8b;
+    color: #2e3440;
+}
+
+#battery,
+#backlight,
+#network,
+#pulseaudio,
+#pulseaudio.muted,
+#bluetooth,
+#custom-power,
+#clock,
+#language {
+    padding: 0 10px;
+}
+
+#battery.critical:not(.charging),
+#network.disconnected,
+#workspaces button.urgent {
+    background-color: #bf616a;
+    color: #2e3440;
+}
+
+#battery.charging {
+    color: #2e3440;
+    background-color: #a3be8c;
+}

@@ -1,0 +1,2 @@
+noblacklist ${HOME}/Downloads
+whitelist ${HOME}/Downloads

@@ -1,0 +1,51 @@
+[global]
+		font = "Ubuntu Regular 12"
+                corner_radius = 5
+		width = (20, 400)
+		origin = top-right
+		offset = 10x10
+		format = "<b>%s</b>\n%b"
+		force_xwayland = false
+		layer = top
+		text_icon_padding = 10
+		horizontal_padding = 10
+
+[change-urgency]
+		appname = "dunstify"
+		urgency = low
+
+[urgency_low]
+		background = "#504945"
+		foreground = "#ebdbb2"
+		frame_color = "#b8bb26"
+		timeout = 3
+		alignment = left
+		hide_text = false
+		set_transient = true
+		icon_position = left
+		min_icon_size = 64
+		max_icon_size = 128
+
+[urgency_normal]
+		background = "#a3be8c"
+		foreground = "#ebdbb2"
+		frame_color = "#fabd2f"
+		timeout = 3
+		alignment = left
+		hide_text = false
+		set_transient = true
+		icon_position = left
+		min_icon_size = 64
+		max_icon_size = 128
+
+[urgency_critical]
+		background = "#bf616a"
+		foreground = "#ebdbb2"
+		frame_color = "#fb4934"
+		timeout = 5
+		alignment = left
+		hide_text = false 
+		set_transient = true
+		icon_position = left
+		min_icon_size = 64
+		max_icon_size = 128

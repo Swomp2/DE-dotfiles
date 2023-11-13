@@ -1,0 +1,109 @@
+{
+		"layer": "top",
+		"position": "top",
+		"height": 25,
+		"width": 1910,
+		"spacing": 3,
+		"margin-top": 5,
+		"modules-left": ["sway/workspaces", "sway/window"],
+		"modules-center": [],
+		"modules-right": [
+				"tray",
+				"sway/language",
+				"bluetooth",
+				"backlight",
+				"pulseaudio", 
+				"network", 
+				"battery",
+				"clock",
+				"custom/power"
+				],
+		
+		"tray": {
+				"icon-size": 20,
+				"spacing": 8,
+		},
+
+		"sway/window": {
+				"format": " {title}",
+				"tooltip": false,
+		},
+
+		"sway/language": {
+				"format": " {}",
+				"on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+				"tooltip": false,
+		},
+
+		"sway/workspaces": {
+				"disable-scroll": false,
+				"all-outputs": true,
+				"format": "{name}",
+		},
+		
+		"clock": {
+				"tooltip-format": "{:%Y %B}",
+				"format-alt": " {:%Y-%m-%d}",
+				"tooltip": false,
+		},
+
+		"backlight": {
+				"format": "{icon} {percent}%",
+				"format-icons": [""],
+				"on-scroll-down": "brightnessctl set 5%-",
+				"on-scroll-up": "brightnessctl set 5%+",
+		},
+
+		"battery": {
+				"states": {
+						"warning": 20,
+						"critical": 10,
+				},
+				
+				"format": "{icon} {capacity}%",
+				"format-charging": "{icon} {capacity}%",
+				"format-icons": [""],
+				"max-lenght": 25,
+				"tooltip": false,
+		},
+
+		"network": {
+				"interface": "wlp2s0",
+				"format-wifi": "   {essid}",
+				"format-disconnected": "Disconnected",
+				"on-click": "~/.config/bemenu/wifi.fish",
+				"tooltip": false,
+		},
+
+		"pulseaudio": {
+				"format": "{icon}  {volume}% {format_source}",
+				"format-bluetooth": "  {volume}% {format_source}",
+				"format-bluetooth-muted": "  {volume}% {format_source}",
+				"format-muted": "  {volume}% {format_source}",
+				"format-source": " {volume}%",
+				"format-source-muted": "  {volume}%",
+				"format-icons": {
+						"headphone": "",
+						"default": "",
+				},
+				"on-click-right": "pavucontrol-qt",
+				"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+				"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+				"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+				"tooltip": false,
+		},
+
+		"bluetooth": {
+			     "format": " {status}",
+			     "format-disabled": " {status}",
+			     "format-connected": " {device_alias}",
+			     "tooltip": false,
+			     "on-click": "~/.config/bemenu/bluetooth.fish",
+		},
+
+		"custom/power": {
+			"format":"",
+			"on-click": "~/.config/bemenu/power.fish",
+			"tooltip": false,
+		},
+}
