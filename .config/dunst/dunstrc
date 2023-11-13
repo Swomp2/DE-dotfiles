@@ -2,7 +2,7 @@
 		font = "Ubuntu Regular 12"
                 corner_radius = 5
 		width = (20, 400)
-		origin = top-right
+		origin = bottom-right
 		offset = 10x10
 		format = "<b>%s</b>\n%b"
 		force_xwayland = false
