@@ -27,7 +27,7 @@
 		max_icon_size = 128
 
 [urgency_normal]
-		background = "#a3be8c"
+		background = "#504945"
 		foreground = "#ebdbb2"
 		frame_color = "#fabd2f"
 		timeout = 3
