@@ -1,0 +1,37 @@
+# Тема
+theme = "gruvbox_material_dark_hard"
+
+# Темы курсора в разныx режимаx
+[editor.cursor-shape]
+normal = "bar"
+insert = "underline"
+select = "block"
+
+[editor]
+# Показывает только открытые в данный момент буферы
+bufferline = "multiple"
+
+# Выделить строкy c курсором
+cursorline = true
+
+# Использовать относительные номера строк
+line-number = "relative"
+
+[editor.lsp]
+# Показывать сообщения LSP в строке состояния
+display-messages = true
+snippets = true
+
+# Конфигурация статус бара
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+left = ["mode", "spinner", "file-modification-indicator", "read-only-indicator"]
+center = ["file-name"]
+right = ["selections", "register", "file-encoding", "position", "diagnostics"]
+
+# Конфигурация мягкого переноса
+[editor.soft-wrap]
+enable = true
+wrap-at-text-width = true

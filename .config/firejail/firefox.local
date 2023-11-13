@@ -1,0 +1,3 @@
+noblacklist ${RUNUSER}/app
+mkdir ${RUNUSER}/app/org.keepassxc.KeePassXC
+whitelist ${RUNUSER}/app/org.keepassxc.KeePassXC

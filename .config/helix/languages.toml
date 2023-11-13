@@ -1,0 +1,16 @@
+use-grammars = { only = ["python", "toml", "rust", "cpp"] }
+
+[[language]]
+name = "python"
+grammar = "python"
+auto-format = true
+
+[[language]]
+name = "rust"
+grammar = "rust"
+auto-format = true
+
+[[language]]
+name = "cpp"
+grammar = "cpp"
+auto-format = true
