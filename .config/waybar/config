@@ -13,6 +13,7 @@
 				"wireplumber",
 				"network", 
 				"clock",
+				"idle_inhibitor",
 				],
 		
 		"tray": {
@@ -26,13 +27,22 @@
 				"tooltip": false,
 		},
 
+		"idle_inhibitor": {
+			"format": "{icon}",
+			"format-icons": {
+				"activated": "",
+				"deactivated": "",
+			},
+			"tooltip": false,
+		},
+
 		"hyprland/language": {
 				"format": " {}",
 				"tooltip": false,
 		},
 
 		"hyprland/workspaces": {
-				"active-only": true,
+				"active-only": false,
 				"format": "{name}",
 		},
 		

@@ -42,6 +42,13 @@ window#waybar {
     box-shadow: 0px 0px;
 }
 
+#idle_inhibitor.deactivated {
+    background-color: #1d2021;
+    color: #fbf1c7; 
+}
+
+#idle_inhibitor,
+#idle_inhibitor.activated,
 #network,
 #wireplumber,
 #wireplumber.muted,
@@ -58,6 +65,8 @@ window#waybar {
     color: #282828;
 }
 
+#idle_inhibitor.deactivated,
+#idle_inhibitor.activated,
 #network,
 #wireplumber,
 #wireplumber.muted,

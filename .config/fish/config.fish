@@ -12,6 +12,8 @@ if status is-login
 	exec dbus-run-session Hyprland	
 end
 
+alias hx="helix"
+
 function fish_prompt
 	 echo (set_color normal)'['(set_color "#a3be8c")$USER'|'$hostname(set_color normal)']-'(set_color normal)'['(set_color "#d08770")(pwd)(set_color normal)']-'(set_color normal)"["(set_color "#ebcb8b")(date +"%a %D %I:%M")(set_color normal)"]"(set_color "#8fbcbb")'==>' (set_color normal)
 end
