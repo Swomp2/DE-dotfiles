@@ -37,7 +37,8 @@
 		},
 
 		"hyprland/language": {
-				"format": " {}",
+				"format-en": " Us",
+				"format-ru": " Ru",
 				"tooltip": false,
 		},
 
@@ -47,15 +48,15 @@
 		},
 		
 		"clock": {
-				"tooltip-format": "{:%Y %B}",
+				"format": " {:%H:%M}",
 				"format-alt": " {:%Y-%m-%d}",
 				"tooltip": false,
 		},
 
 		"network": {
 				"interface": "enp5s0",
-				"format-ethernet": "Connected",
-				"format-disconnected": "Disconnected",
+				"format-ethernet": " Connected",
+				"format-disconnected": " Disconnected",
 				"tooltip": false,
 		},
 
