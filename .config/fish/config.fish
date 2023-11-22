@@ -15,7 +15,7 @@ end
 alias hx="helix"
 
 function fish_prompt
-	 echo (set_color normal)'['(set_color "#a3be8c")$USER'|'$hostname(set_color normal)']-'(set_color normal)'['(set_color "#d08770")(pwd)(set_color normal)']-'(set_color normal)"["(set_color "#ebcb8b")(date +"%a %D %I:%M")(set_color normal)"]"(set_color "#8fbcbb")'==>' (set_color normal)
+	 echo (set_color normal)'['(set_color "#b8bb26")$USER'|'$hostname(set_color normal)']-'(set_color normal)'['(set_color "#fe8019")(pwd)(set_color normal)']-'(set_color normal)"["(set_color "#fabd2f")(date +"%a %D %I:%M")(set_color normal)"]"(set_color "#83a598")'==>' (set_color normal)
 end
 
 function fish_greeting
