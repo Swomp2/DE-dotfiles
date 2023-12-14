@@ -49,7 +49,7 @@
 		
 		"clock": {
 				"format": " {:%I:%M}",
-				"format-alt": " {:%Y-%m-%d}",
+				"format-alt": " {:%a %e %b %Y}",
 				"tooltip": false,
 		},
 
