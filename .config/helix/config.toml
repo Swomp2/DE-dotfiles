@@ -34,4 +34,3 @@ right = ["selections", "register", "file-encoding", "position", "diagnostics"]
 # Конфигурация мягкого переноса
 [editor.soft-wrap]
 enable = true
-wrap-at-text-width = true
