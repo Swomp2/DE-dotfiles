@@ -53,6 +53,7 @@ window#waybar {
 #wireplumber,
 #wireplumber.muted,
 #clock,
+#workspaces button.focused,
 #workspaces button.active,
 #workspaces button.persistent,
 #custom-song,

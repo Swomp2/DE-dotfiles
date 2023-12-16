@@ -1,0 +1,96 @@
+ {
+		"layer": "top",
+		"position": "top",
+		"height": 25,
+		"width": 2550,
+		"spacing": 3,
+		"margin-top": 5,
+		"modules-left": ["sway/workspaces", "sway/window"],
+		"modules-center": ["custom/previous-song", "custom/song", "custom/next-song"],
+		"modules-right": [
+				"tray",
+				"sway/language",
+				"wireplumber",
+				"network", 
+				"clock",
+				"idle_inhibitor",
+				],
+		
+		"tray": {
+				"icon-size": 20,
+				"spacing": 8,
+		},
+
+		"sway/window": {
+				"format": " {title}",
+				"max-length": 40,
+				"tooltip": false,
+		},
+
+		"idle_inhibitor": {
+			"format": "{icon}",
+			"format-icons": {
+				"activated": "",
+				"deactivated": "",
+			},
+			"tooltip": false,
+		},
+
+		"sway/language": {
+				"format": " {}",
+				"on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+				"tooltip": false,
+		},
+
+		"hyprland/workspaces": {
+				"active-only": false,
+				"format": "{name}",
+		},
+		
+		"clock": {
+				"format": " {:%I:%M}",
+				"format-alt": " {:%a %e %b %Y}",
+				"tooltip": false,
+		},
+
+		"network": {
+				"interface": "enp5s0",
+				"format-ethernet": " Connected",
+				"format-disconnected": " Disconnected",
+				"tooltip": false,
+		},
+
+		"wireplumber": {
+				"format": "{icon} {volume}%",
+				"format-muted": "  {volume}% ",
+				"format-icons": {
+						"headphone": "",
+						"default": "",
+				},
+				"on-click-right": "pavucontrol-qt",
+				"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+				"on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+				"on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+				"tooltip": false,
+		},
+
+		"custom/song": {
+			     "format": "{}",
+			     "exec": "playerctl metadata --format '{{ title }}' -F",
+			     "on-click": "playerctl play-pause",
+		             "max-length": 40,
+			     "tooltip": false,
+		},
+
+		"custom/next-song": {
+			     "format": "",
+			     "on-click": "playerctl next",
+			     "tooltip": false,
+		},
+
+		"custom/previous-song": {
+			     "format": "",
+			     "on-click": "playerctl previous",
+			     "tooltip": false,
+		},
+}

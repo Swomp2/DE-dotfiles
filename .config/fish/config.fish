@@ -1,10 +1,8 @@
-if status is-login
-   	export PATH="$PATH:/var/lib/flatpak/exports/bin"
-	export PATH="$PATH:/usr/local/libexec"
-	export PATH="$PATH:/home/swomp/.local/bin"
-	export PATH="$PATH:/home/swomp/.cargo/bin"
-end
-
+export PATH="$PATH:/var/lib/flatpak/exports/bin"
+export PATH="$PATH:/usr/local/libexec"
+export PATH="$PATH:/home/swomp/.local/bin"
+export PATH="$PATH:/home/swomp/.cargo/bin"
+export VDPAU_DRIVER=radeonsi
 export VISUAL=hx
 
 function fish_prompt

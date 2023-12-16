@@ -1,0 +1,229 @@
+# Перестраховка
+# exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# Выключение bluetooth при старте
+exec bluetoothctl power off
+
+# Уведомления
+exec dunst &
+
+# Ночная подсветка
+exec gammastep -l 55.75222:37.61556 -t 6500K:4000K -m wayland &
+
+# Запрос пароля при важных действиях
+exec lxqt-policykit-agent &
+
+# Звук
+exec gentoo-pipewire-launcher &
+
+# Тема курсора
+seat seat0 xcursor_theme "Breeze" 10
+exec gsettings set org.gnome.desktop.interface cursor-theme "Breeze"
+
+# Статусбар
+exec waybar &
+
+# Отмена выключения экрана во время проигрывания звука
+exec sway-audio-idle-inhibit
+
+# Монтирование устройств
+exec udiskie &
+
+# Блокировка экрана
+exec swayidle -w timeout 300 "~/.config/bemenu/lockscreen.fish" timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep "~/.config/bemenu/lockscreen.fish" 
+
+# Скриншоты
+bindsym Print exec --no-startup-id ~/.config/bemenu/screenshot.fish
+
+# Громкость по-умолчанию
+exec pactl set-sink-volume @DEFAULT_SINK@ 30%
+
+# Яркость по-умолчанию
+exec brightnessctl set 40%
+
+# Тачпад
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+# Клавиатура
+input * {
+    xkb_layout "us,ru"
+    xkb_options "grp:alt_shift_toggle"
+}
+
+# Рандомные обои на старте
+set $wallpapers_path $HOME/Pictures/wallpapers
+output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
+
+set $mod Mod4
+
+# Правила окон
+for_window [app_id="pavucontrol"] floating enable, resize set width 550 px height 600 px, move position cursor, move down 35
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [app_id="org.strawberrymusicplayer.strawberry"] move workspace 2
+for_window [app_id="org.kde.ark"] floating enable
+for_window [app_id="lxqt-policykit-agent"] floating enable
+
+# Промежутки между окнами
+gaps inner 6
+
+# Цвета окон                    border          background      text            indicator     child_border
+client.focused                  #5E81AC         #8FBCBB         #81A1C1         #8FBCBB       #8FBCBB
+client.focused_inactive         #81A1C1         #434C5E         #5E81AC         #434C5E       #434C5E
+client.unfocused                #81A1C1         #434C5E         #5E81AC         #434C5E       #434C5E
+
+# Рамки и заголовки окон
+for_window [title="^.*"] title_format ""
+default_border pixel 2
+default_floating_border pixel 2
+
+# Регулировка яркости
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+
+# Шрифт для заголовков окон, который также будет использоваться в статусбаре
+font pango:Ubuntu Regular 10
+
+# Регулировка звука
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Клавиша модификатор
+floating_modifier $mod
+
+# Рандомные обои
+bindsym $mod+Shift+w output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
+
+# Терминал
+bindsym $mod+Return exec alacritty
+
+# Закрытие активного окна
+bindsym $mod+Shift+c kill
+
+# Запуск программного лаунчера
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='bemenu --nb "#2e3440" --nf "#eceff4" --tb "#81a1c1" --tf "#2e3440" --fb "#2e3440" --ff "#eceff4" --hb "#81a1c1" --hf "#2e3440" --ab "#2e3440" --af "#eceff4" -H 10 -M 750 -c --border 2 --bdr "#8fbcbb" --prompt="Проги:" --list 15 -i --fn "Ubuntu Regular 10"'
+
+# Блокировка экрана с помощью сочетания клавиш
+bindsym $mod+o exec ~/.config/bemenu/lockscreen.fish
+
+# Изменение фокуса
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# либо можно использовать стрелки:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Перемещение активного окна
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# либо можно использовать стрелки:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Переключение в горизонтальный режим размещения
+bindsym $mod+h split v
+
+# Переключение в вертикальный режим размещения
+bindsym $mod+v split h
+
+# Разворачивание на весь экран
+bindsym $mod+f fullscreen toggle
+
+# Изменение раскладки контейнера(stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Изменение режима между плавающим и мозаичным
+bindsym $mod+Shift+space floating toggle
+
+# Переключение между плавающими и обычными окнами
+bindsym $mod+space focus mode_toggle
+
+# Фокус на родительском контейнере(может быть окне)
+bindsym $mod+a focus parent
+
+# Имена рабочих столов
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Переключение между рабочими столами
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Перемещение контейнеров между рабочими столами
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Перезагрузка конфига sway
+bindsym $mod+Shift+r reload
+# Выход из sway
+bindsym $mod+Shift+e exec ~/.config/bemenu/power.fish
+
+# Изменение размера окон (можно использовать мышь)
+mode "resize" {
+        # Эти сочетания заработают сразу после перехода в режим изменения размера
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize grow width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize shrink width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize grow width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize shrink width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"

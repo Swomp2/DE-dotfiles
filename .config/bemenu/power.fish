@@ -7,5 +7,6 @@ if test $answer = "Перезагрузиться"
 else if test $answer = "Выключиться"
    exec loginctl poweroff
 else if test $answer = "Выйти"
-   exec hyprctl dispatch exit
+   pgrep -x sway || exec hyprctl dispatch exit
+   pgrep -x Hyprland || exec swaymsg exit
 end
