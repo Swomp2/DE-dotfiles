@@ -43,7 +43,7 @@ exec gsettings set org.gnome.desktop.interface cursor-theme "Breeze"
 gaps inner 6
 
 # Цвета окон                    border          background      text            indicator     child_border
-client.focused                  #b8bb26         #98971a         #1d2021         #98971a       #98971a
+client.focused                  #b8bb26         #b8bb26         #1d2021         #b8bb26       #b8bb26
 client.focused_inactive         #1d2021         #1d2021         #fbf1c7         #1d2021       #1d2021
 client.unfocused                #1d2021         #1d2021         #fbf1c7         #1d2021       #1d2021
 
