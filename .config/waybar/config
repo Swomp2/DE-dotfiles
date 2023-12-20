@@ -55,8 +55,8 @@
 
 		"network": {
 				"interface": "enp5s0",
-				"format-ethernet": " Connected",
-				"format-disconnected": " Disconnected",
+				"format-ethernet": " Подключено",
+				"format-disconnected": " Отключено",
 				"tooltip": false,
 		},
 
