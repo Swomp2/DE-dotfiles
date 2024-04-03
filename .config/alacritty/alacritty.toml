@@ -1,0 +1,19 @@
+import = ["/home/swomp/.config/alacritty/themes/themes/gruvbox_dark.toml"]
+
+[font]
+size = 9
+
+[font.bold]
+family = "Hack"
+style = "Bold"
+
+[font.italic]
+family = "Hack"
+style = "Italic"
+
+[font.normal]
+family = "Hack"
+style = "Regular"
+
+[window]
+opacity = 0.8
