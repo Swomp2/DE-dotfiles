@@ -8,7 +8,11 @@
    '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "871b064b53235facde040f6bdfa28d03d9f4b966d8ce28fb1725313731a2bcc8" "2ff9ac386eac4dffd77a33e93b0c8236bb376c5a5df62e36d4bfa821d56e4e20" "72ed8b6bffe0bfa8d097810649fd57d2b598deef47c992920aef8b5d9599eefe" default))
  '(minimap-window-location 'right)
  '(package-selected-packages
+<<<<<<< HEAD
    '(flycheck-clang-tidy flycheck-clang-analyzer flycheck-clangcheck flycheck-rust eglot sideline-flycheck flymake-flycheck flycheck-eglot sideline-flymake ligature minimap sublimity aggressive-indent neon-mode neotree dashboard projectile doom-modeline swiper sideline-eglot yasnippet-snippets yasnippet gruvbox-theme company which-key ##)))
+=======
+   '(all-the-icons sideline-eglot company-quickhelp dashboard yasnippet-classic-snippets flycheck-cython flycheck-pycheckers flycheck-clang-tidy flycheck-clang-analyzer flycheck-clangcheck flycheck-rust sideline-flycheck flymake-flycheck sideline-flymake ligature aggressive-indent neotree doom-modeline swiper yasnippet-snippets yasnippet gruvbox-theme company which-key ##)))
+>>>>>>> 8016db32 (some additions to emacs and hyprland config files)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -28,7 +32,18 @@
 (electric-indent-mode 1)
 (setq-default auto-save-no-message t)
 (setq-default auto-save-timer 500)
+(setq gc-cons-threshold 100000000)
 
+<<<<<<< HEAD
+=======
+(add-hook 'rust-mode-hook
+	  (lambda () (setq indent-tabs-mode nil)))
+
+(use-package rust-mode
+  :init
+  (setq rust-mode-treesitter-derive t))
+
+>>>>>>> 8016db32 (some additions to emacs and hyprland config files)
 (add-to-list 'default-frame-alist '(font . "Fira Code-9"))
 
 (require 'package)
@@ -70,9 +85,18 @@
 	      sideline-backends-right '((sideline-eglot    . up)
 					(sideline-flycheck . down))))
 
+<<<<<<< HEAD
 (use-package company
   :after eglot
   :hook (eglot-managed-mode . company-mode))
+=======
+
+(use-package company
+  :after eglot
+  :hook (eglot-managed-mode . company-mode)
+  :config (setq company-idle-delay 0.01
+		company-minimum-prefix-length 1))
+>>>>>>> 8016db32 (some additions to emacs and hyprland config files)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -102,33 +126,6 @@
 (setq doom-modeline-buffer-file-state-icon t)
 (setq doom-modeline-env-version t)
 
-;;dashboard
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook))
-
-(setq dashboard-startupify-list '((dashboard-insert-banner)
-				  (dashboard-insert-newline)
-				  (dashboard-insert-banner-title)
-				  (dashboard-insert-newline)
-				  (dashboard-insert-items)
-				  (dashboard-insert-newline)))
-(setq dashboard-banner-logo-title "Welcome to Emacs!!")
-(setq dashboard-startup-banner 'logo)
-(setq dashboard-center-content t)
-(setq dashboard-vertically-center-content t)
-(setq dashboard-items '((recents   . 10)
-			(projects  . 5)
-			(bookmarks . 5)))
-(setq dashboard-navigation-cycle t)
-(setq dashboard-item-shortcuts '((recents   . "r")
-				 (projects  . "p")
-				 (bookmarks . "b")))
-(setq dashboard-icon-type 'nerd-icons)
-
-(setq initial-buffer-choice (lambda () (get-buffer-create *Dashboard*)))
-
 ;;neotree
 (require 'neotree)
 (global-set-key (kbd "C-u") 'neotree-toggle)
@@ -152,7 +149,37 @@
 (setq interprogram-paste-function 'wl-paste)
 
 (global-aggressive-indent-mode 1)
+<<<<<<< HEAD
 (sublimity-mode 1)
+=======
+
+;;dashboard
+;; (use-package dashboard
+;;   :ensure t
+;;   :config
+;;   (dashboard-setup-startup-hook))
+
+;; (setq dashboard-startupify-list '((dashboard-insert-banner)
+;; 				  (dashboard-insert-newline)
+;; 				  (dashboard-insert-banner-title)
+;; 				  (dashboard-insert-newline)
+;; 				  (dashboard-insert-items)
+;; 				  (dashboard-insert-newline)))
+;; (setq dashboard-banner-logo-title "Welcome to Emacs!!")
+;; (setq dashboard-startup-banner 'logo)
+;; (setq dashboard-center-content t)
+;; (setq dashboard-vertically-center-content t)
+;; (setq dashboard-items '((recents   . 10)
+;; 			(projects  . 5)
+;; 			(bookmarks . 5)))
+;; (setq dashboard-navigation-cycle t)
+;; (setq dashboard-item-shortcuts '((recents   . "r")
+;; 				 (projects  . "p")
+;; 				 (bookmarks . "b")))
+;; (setq dashboard-icon-type 'nerd-icons)
+
+;; (setq initial-buffer-choice (lambda () (get-buffer-create "*Dashboard*")))
+>>>>>>> 8016db32 (some additions to emacs and hyprland config files)
 
 ;;ligatures
 (use-package ligature
@@ -225,3 +252,26 @@
   ;; Enables ligature checks globally in all buffers. You can also do it
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
+<<<<<<< HEAD
+=======
+
+(global-set-key (kbd "C-c C-c") 'kill-ring-save)
+(global-set-key (kbd "C-c C-v") 'yank)
+(global-set-key (kbd "C-c C-x") 'kill)
+(global-set-key (kbd "C-b") 'undo)
+(global-set-key (kbd "C-h") 'scroll-down-command)
+(global-set-key (kbd "C-t") 'scroll-up-command)
+(global-set-key (kbd "C-g") 'goto-line)
+(global-set-key (kbd "C-r") 'goto-char)
+(global-set-key (kbd "C-s") 'forward-page)
+(global-set-key (kbd "C-n") 'backward-page)
+(global-set-key (kbd "C-a") 'isearch-forward)
+(global-set-key (kbd "C-o") 'isearch-backward)
+(global-set-key (kbd "C-k") 'kill-buffer)
+(global-set-key (kbd "C-l") 'list-buffers)
+(global-set-key (kbd "C-i") 'other-window)
+(global-set-key (kbd "C-;") 'comment-dwim)
+(global-set-key (kbd "C-j") 'delete-other-windows)
+(global-set-key (kbd "C-q") 'split-window-horizontally)
+(global-set-key (kbd "C-,") 'split-window-vertically)
+>>>>>>> 8016db32 (some additions to emacs and hyprland config files)
