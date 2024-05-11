@@ -147,4 +147,3 @@ windowrule=float,^(org.kde.ark)$
 windowrule=float,title:^(Копирование файлов)$
 windowrule=float,title:^(Подтвердить замену файлов)$
 windowrule=float,^(lxqt-archiver)
-windowrule=float,title:^(Настройки)$
