@@ -44,6 +44,8 @@
 		"hyprland/workspaces": {
 				"active-only": false,
 				"format": "{name}",
+				"sort-by-number": true,
+				"on-click": "activate",
 		},
 		
 		"clock": {
@@ -66,7 +68,7 @@
 						"headphone": "",
 						"default": "",
 				},
-				"on-click-right": "pavucontrol-qt",
+				"on-click-right": "~/.config/bemenu/pavucontrol.fish",
 				"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
 				"on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
 				"on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
