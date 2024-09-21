@@ -8,7 +8,7 @@
    '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "871b064b53235facde040f6bdfa28d03d9f4b966d8ce28fb1725313731a2bcc8" "2ff9ac386eac4dffd77a33e93b0c8236bb376c5a5df62e36d4bfa821d56e4e20" "72ed8b6bffe0bfa8d097810649fd57d2b598deef47c992920aef8b5d9599eefe" default))
  '(minimap-window-location 'right)
  '(package-selected-packages
-   '(counsel smex terminal-here all-the-icons sideline-eglot company-quickhelp dashboard yasnippet-classic-snippets flycheck-cython flycheck-pycheckers flycheck-clang-tidy flycheck-clang-analyzer flycheck-clangcheck flycheck-rust sideline-flycheck flymake-flycheck sideline-flymake ligature aggressive-indent neotree doom-modeline swiper yasnippet-snippets yasnippet gruvbox-theme company which-key ##)))
+   '(auctex flycheck-projectile projectile page-break-lines python-black pythontest sideline-flycheck sideline-flymake sideline-eglot lsp-mode lsp-ui fish-mode rust-mode smex terminal-here all-the-icons company-quickhelp dashboard yasnippet-classic-snippets flycheck-cython flycheck-pycheckers flycheck-clang-tidy flycheck-clang-analyzer flycheck-clangcheck flycheck-rust flymake-flycheck ligature aggressive-indent neotree doom-modeline swiper yasnippet-snippets yasnippet gruvbox-theme company which-key ##)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -21,36 +21,51 @@
 ;; If there is more than one, they won't work right.
 
 (add-to-list 'default-frame-alist '(font . "Fira Code 10"))
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(setq recentf-max-saved-items 25)
 
-(require 'counsel)
+;; dashboard
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startupify-list '(dashboard-insert-banner
+				    dashboard-insert-newline
+				    dashboard-insert-banner-title
+				    dashboard-insert-newline
+				    dashboard-insert-items
+				    dashboard-insert-newline))
+  (setq dashboard-banner-logo-title "Добро пожаловать в Emacs!!")
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-center-content t)
+  (setq dashboard-vertically-center-content t)
+  (setq dashboard-items '((recents   . 10)
+			  (projects  . 5)))
+  (setq dashboard-navigation-cycle t)
+  (setq dashboard-item-shortcuts '((recents   . "r")
+				   (projects  . "p")))
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-icon-type 'nerd-icons)
 
-(setq-default fancy-splash-image '"~/Pictures/emacs_logo.png")
-(defconst fancy-startup-text
-  `((:face variable-pitch
-	   "Добро пожаловать :)\n"
-	   :link ("Мой Github"
-		  ,(lambda (_button)
-		     (browse-url "https://github.com/Swomp2/DE-dotfiles")))
-	   
-	   :link ("\nФайл конфигурации"
-		  ,(lambda (_button)
-		     (find-file "~/.emacs")))
-	   
-	   :link ("\nПоследние файлы"
-		  ,(lambda (_button)
-		     (counsel-recentf)))
-	   )))
-
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*Dashboard*"))))
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
 (electric-pair-mode 1)
 (electric-indent-mode 1)
 (setq-default auto-save-no-message t)
 (setq-default auto-save-timer 500)
 (setq gc-cons-threshold 100000000)
+
+;; python formatting
+(use-package python-black
+  :demand t
+  :after python
+  :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
 (use-package rust-mode
   :init
@@ -81,7 +96,7 @@
 (use-package eglot
   :ensure t
   :defer t
-  :config (add-to-list 'eglot-server-programs '(python-mode . ("pylsp")))
+  :config (add-to-list 'eglot-server-programs '(python-mode . ("pyright")))
   (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
   (add-to-list 'eglot-server-programs '(c++-mode . ("clangd")))
   :hook ((python-mode . eglot-ensure)
@@ -221,10 +236,13 @@
                             "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
                             ;; The few not covered by the regexps.
                             "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))	   
-  (global-ligature-mode t))
+      (global-ligature-mode t))
 
 (require 'terminal-here)
 (setq terminal-here-linux-terminal-command 'kitty)
+
+;; projectile
+(projectile-mode +1)
 
 (global-set-key (kbd "C-y") 'terminal-here-launch)
 (global-set-key (kbd "C-f") 'find-file)
@@ -249,5 +267,4 @@
 (global-set-key (kbd "C-v") 'split-window-vertically)
 (global-set-key (kbd "C-o") 'move-end-of-line)
 (global-set-key (kbd "C-a") 'move-beginning-of-line)
-(global-set-key (kbd "M-r") 'counsel-recentf)
-(global-set-key (kbd "M-v") 'counsel-command-history)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
