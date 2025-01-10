@@ -1,0 +1,181 @@
+output DP-1 resolution 2560x1440@165hz
+
+exec ~/.config/sway/variables.fish
+
+exec --no-startup-id dbus-update-activation-environment --all
+exec pgrep -x dunst || dunst &
+exec pgrep -x gammastep || gammastep &
+exec pgrep -x lxqt-policykit-agent || lxqt-policykit-agent &
+exec gentoo-pipewire-launcher 
+exec pgrep -x waybar || waybar -c ~/.config/waybar/config-sway &
+exec pgrep -x udiskie || udiskie --no-automount --appindicator -n &
+exec swww init
+exec swayidle -w timeout 300 "~/.config/bemenu/lockscreen.fish" timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep "~/.config/bemenu/lockscreen.fish" 
+exec wl-paste --watch cliphist store
+
+input * {
+	accel_profile "adaptive"
+	pointer_accel 1
+    xkb_layout "us,ru"
+    xkb_options "grp:ctrl_alt_toggle"
+}
+
+# Правила окон
+for_window [app_id="pavucontrol"] floating enable, resize set width 550 px height 600 px, move position cursor, move down 35
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [app_id="org.strawberrymusicplayer.strawberry"] move scratchpad
+for_window [app_id="org.kde.ark"] floating enable
+for_window [app_id="lxqt-policykit-agent"] floating enable
+
+# Рамки и заголовки окон
+for_window [title="^.*"] title_format ""
+default_border pixel 2
+default_floating_border pixel 2
+
+# Тема курсора
+seat seat0 xcursor_theme "Breeze" 10
+exec gsettings set org.gnome.desktop.interface cursor-theme "Breeze"
+
+# Промежутки между окнами
+gaps inner 6
+
+# Цвета окон                    border          background      text            indicator     child_border
+client.focused                  #b8bb26         #b8bb26         #1d2021         #b8bb26       #b8bb26
+client.focused_inactive         #1d2021         #1d2021         #fbf1c7         #1d2021       #1d2021
+client.unfocused                #1d2021         #1d2021         #fbf1c7         #1d2021       #1d2021
+
+# Шрифт для заголовков окон
+font pango:Ubuntu Regular 10
+
+# Клавиша модификатор
+set $mod Mod4
+floating_modifier $mod
+
+# Терминал
+bindsym $mod+u exec alacritty
+
+# Закрытие активного окна
+bindsym $mod+Ctrl+a kill
+
+# Переключение в горизонтальный режим размещения
+bindsym $mod+b split v
+
+# Переключение в вертикальный режим размещения
+bindsym $mod+v split h
+
+# Разворачивание на весь экран
+bindsym $mod+r fullscreen toggle
+
+# Перезагрузка конфига sway
+bindsym $mod+Ctrl+r reload
+
+# Изменение режима между плавающим и мозаичным
+bindsym $mod+Ctrl+f floating toggle
+
+# Переключение между плавающими и обычными окнами
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+ctrl+c exec ~/.config/bemenu/cliphist.fish
+
+# Выход из sway
+bindsym $mod+ctrl+e exec ~/.config/bemenu/power.fish
+
+# Блокировка экрана с помощью сочетания клавиш
+bindsym $mod+Ctrl+o exec ~/.config/bemenu/lockscreen.fish
+
+# Скриншоты
+bindsym Print exec ~/.config/bemenu/screenshot.fish
+
+# Рандомные обои
+bindsym $mod+w exec ~/.config/bemenu/swww-random.fish
+
+# Имена рабочих столов
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Изменение фокуса
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Изменение раскладки контейнера(stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+d layout tabbed
+bindsym $mod+f layout toggle split
+
+# Перемещение активного окна
+bindsym $mod+Ctrl+h move left
+bindsym $mod+Ctrl+j move down
+bindsym $mod+Ctrl+k move up
+bindsym $mod+Ctrl+l move right
+
+# Scratchpad(аналог минимизирования приложений)
+bindsym $mod+m scratchpad show
+bindsym $mod+Ctrl+s move scratchpad
+
+# Переключение между рабочими столами
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+n workspace next
+bindsym $mod+p workspace prev
+
+# Перемещение окон(контейнеров) на рабочие столы
+bindsym $mod+Ctrl+n move container to workspace next
+bindsym $mod+Ctrl+p move container to workspace prev
+
+# Регулировка звука
+bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# Запуск меню приложений
+bindsym $mod+a exec ~/.config/bemenu/menu.fish
+
+# Перемещение контейнеров между рабочими столами
+bindsym $mod+Ctrl+1 move container to workspace number $ws1
+bindsym $mod+Ctrl+2 move container to workspace number $ws2
+bindsym $mod+Ctrl+3 move container to workspace number $ws3
+bindsym $mod+Ctrl+4 move container to workspace number $ws4
+bindsym $mod+Ctrl+5 move container to workspace number $ws5
+bindsym $mod+Ctrl+6 move container to workspace number $ws6
+bindsym $mod+Ctrl+7 move container to workspace number $ws7
+bindsym $mod+Ctrl+8 move container to workspace number $ws8
+bindsym $mod+Ctrl+9 move container to workspace number $ws9
+bindsym $mod+Ctrl+0 move container to workspace number $ws10
+
+# Изменение размера окон (можно использовать мышь)
+mode "resize" {
+        # Эти сочетания заработают сразу после перехода в режим изменения размера
+
+        bindsym j resize grow width 10 px or 10 ppt
+        bindsym i resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize shrink width 10 px or 10 ppt
+
+        # Обратно в обычный режим: Enter or Escape or $mod+o
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+o mode "default"
+}
+
+bindsym $mod+o mode "resize"
